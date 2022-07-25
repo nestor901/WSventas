@@ -11,6 +11,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddDbContext<VentaRealContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("WSVentasDb"));
 });
+builder.Services.AddCors(crs => crs.AddPolicy("corsPolity", build=>{
+    build.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyHeader();
+}));
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
@@ -21,6 +24,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.UseCors("corsPolity");
 
 app.UseHttpsRedirection();
 
