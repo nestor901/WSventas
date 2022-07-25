@@ -36,7 +36,6 @@ namespace WSventas.Controllers
        [HttpPost]
        public IActionResult Add(ClienteRequest oModel){
         Respuesta oRespuesta = new Respuesta();
-        oRespuesta.Exito = 0;
         try
         {
             using (VentaRealContext db = new VentaRealContext())
@@ -44,6 +43,48 @@ namespace WSventas.Controllers
                 Cliente oCliente = new Cliente();
                 oCliente.Nombre = oModel.Nombre;
                 db.Add(oCliente);
+                db.SaveChanges(); 
+                oRespuesta.Exito = 1;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            oRespuesta.Mensaje = ex.Message;
+        }
+        return Ok();
+       }
+       
+
+        [HttpPut]
+       public IActionResult Edit(ClienteRequest oModel){
+        Respuesta oRespuesta = new Respuesta();
+        try
+        {
+            using (VentaRealContext db = new VentaRealContext())
+            {
+                Cliente oCliente = db.Clientes.Find(oModel.id);
+                oCliente.Nombre = oModel.Nombre;
+                db.Entry(oCliente).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                db.SaveChanges(); 
+                oRespuesta.Exito = 1;
+            }
+        }
+        catch (System.Exception ex)
+        {
+            oRespuesta.Mensaje = ex.Message;
+        }
+        return Ok();
+       }
+       
+        [HttpDelete]
+       public IActionResult Delete(ClienteRequest oModel){
+        Respuesta oRespuesta = new Respuesta();
+        try
+        {
+            using (VentaRealContext db = new VentaRealContext())
+            {
+                Cliente oCliente = db.Clientes.Find(oModel.id);
+                db.Remove(oCliente);
                 db.SaveChanges(); 
                 oRespuesta.Exito = 1;
             }
