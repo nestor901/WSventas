@@ -12,7 +12,7 @@ builder.Services.AddDbContext<VentaRealContext>(opt => {
     opt.UseSqlServer(builder.Configuration.GetConnectionString("WSVentasDb"));
 });
 builder.Services.AddCors(crs => crs.AddPolicy("corsPolity", build=>{
-    build.WithOrigins("localhost:4200").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
 }));
 builder.Services.AddSwaggerGen();
 
