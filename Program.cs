@@ -8,9 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddDbContext<VentaRealContext>(opt => {
-    opt.UseSqlServer(builder.Configuration.GetConnectionString("WSVentasDb"));
-});
 builder.Services.AddCors(crs => crs.AddPolicy("corsPolity", builder=>{
     builder.WithOrigins("http://localhost:4200/cliente","*").AllowAnyMethod().AllowAnyHeader();
 }));

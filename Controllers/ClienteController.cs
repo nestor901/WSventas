@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using WSventas.Controllers;
 using WSventas.Models;
 using WSventas.Models.Response;
-using WSventas.Models.ViewModels;
+using WSventas.Models.Request;
 
 namespace WSventas.Controllers
 {
