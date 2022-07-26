@@ -23,14 +23,17 @@ namespace WSventas.Controllers
             {
                 var lst = db.Clientes.ToList();
                 oRespuesta.Exito=1;
-                return Ok(lst);
+                oRespuesta.Data=lst;
+                
             }
         }
         catch (System.Exception ex)
         {
             oRespuesta.Mensaje = ex.Message;
+
         }
         return Ok(oRespuesta);
+
        }
 
        [HttpPost]
